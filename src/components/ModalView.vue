@@ -8,18 +8,17 @@
 </template>
 
 <script>
-import { onBeforeUnmount } from 'vue'
+import useKeydown from '@/composables/use-keydown'
 export default {
   setup(props, { emit }) {
-    let onKeydown = (event) => {
-      if (event.key === 'Escape') {
-        emit('close-modal')
-      }
-    }
-    window.addEventListener('keydown', onKeydown)
-    onBeforeUnmount(() => {
-      window.removeEventListener('close-modal')
-    })
+    useKeydown([
+      {
+        key: 'Escape',
+        fn: () => {
+          emit('close-modal')
+        },
+      },
+    ])
     return {
       emit,
     }

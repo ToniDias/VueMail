@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import MailTable from "@/components/MailTable.vue";
+import MailTable from '@/components/MailTable.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     MailTable,
   },
-};
+}
 </script>
 
 <style>
@@ -46,7 +46,7 @@ button.selected {
 .clickable {
   cursor: pointer;
 }
-input[type="checkbox"] {
+input[type='checkbox'] {
   -webkit-appearance: none;
   cursor: pointer;
   width: 24px;
@@ -58,10 +58,10 @@ input[type="checkbox"] {
   vertical-align: middle;
   padding: 10px;
 }
-input[type="checkbox"].partial-check {
+input[type='checkbox'].partial-check {
   background: #abc;
 }
-input[type="checkbox"]:checked {
+input[type='checkbox']:checked {
   background: #679;
 }
 .mb-0 {

@@ -1,15 +1,15 @@
 import { onBeforeUnmount } from 'vue'
 
-let useKeydown = (keyCombos) => {
-  let onKeydown = (event) => {
-    let kc = keyCombos.find((kc) => kc.key === event.key)
+const useKeydown = (keyCombos) => {
+  const onKeydown = (event) => {
+    const kc = keyCombos.find((kc) => kc.key === event.key)
     if (kc) {
       kc.fn()
     }
   }
   window.addEventListener('keydown', onKeydown)
   onBeforeUnmount(() => {
-    window.removeEventListener('close-modal', onKeydown)
+    window.removeEventListener('keydown', onKeydown)
   })
 }
 

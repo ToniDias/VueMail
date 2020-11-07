@@ -1,10 +1,33 @@
 <template>
-  <input
-    type="checkbox"
-    :checked="allEmailsSelected"
-    :class="[someEmailSelected ? 'partial-check' : '']"
-    @click="bulkSelect"
-  />
+  <div class="bulk-action-bar">
+    <span class="checkbox">
+      <input
+        type="checkbox"
+        :checked="allEmailsSelected"
+        :class="[someEmailSelected ? 'partial-check' : '']"
+        @click="bulkSelect"
+    /></span>
+    <span class="buttons">
+      <button
+        @click="emailSelection.markRead()"
+        :disabled="Array.from(emailSelection.emails).every((e) => e.read)"
+      >
+        Mark Read
+      </button>
+      <button
+        @click="emailSelection.markUnread()"
+        :disabled="Array.from(emailSelection.emails).every((e) => !e.read)"
+      >
+        Mark Unread
+      </button>
+      <button
+        @click="emailSelection.archive()"
+        :disabled="numberSelected === 0"
+      >
+        Archive
+      </button>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -34,6 +57,8 @@ export default {
       allEmailsSelected,
       someEmailSelected,
       bulkSelect,
+      emailSelection,
+      numberSelected,
     }
   },
   props: {

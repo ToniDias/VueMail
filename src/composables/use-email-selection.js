@@ -1,6 +1,11 @@
 import { reactive } from 'vue'
-
+import axios from 'axios'
+import { localhost } from '@/utils.js'
 const emails = reactive(new Set())
+
+const updateEmail = (email) => {
+  axios.put(localhost.emails + `/${email.id}`, email)
+}
 
 export const useEmailSelection = () => {
   const toggle = (email) => {
@@ -18,11 +23,27 @@ export const useEmailSelection = () => {
       emails.add(email)
     })
   }
+
+  const forSelected = (fn) => {
+    emails.forEach((email) => {
+      fn(email)
+      updateEmail(email)
+    })
+  }
+  const markRead = () => forSelected((e) => (e.read = true))
+  const markUnread = () => forSelected((e) => (e.read = false))
+  const archive = () => {
+    forSelected((e) => (e.archived = true))
+    clear()
+  }
   return {
     emails,
     toggle,
     clear,
     addMultiple,
+    markRead,
+    markUnread,
+    archive,
   }
 }
 

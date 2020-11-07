@@ -37,13 +37,13 @@ export default {
   setup(props) {
     let emailSelection = useEmailSelection()
     let numberSelected = computed(() => emailSelection.emails.size)
-    // eslint-disable-next-line vue/no-setup-props-destructure
-    let numberEmails = props.emails.length
+    let numberEmails = computed(() => props.emails.length)
     let allEmailsSelected = computed(
-      () => numberEmails === numberSelected.value
+      () => numberEmails.value === numberSelected.value
     )
     let someEmailSelected = computed(
-      () => numberSelected.value > 0 && numberSelected.value < numberEmails
+      () =>
+        numberSelected.value > 0 && numberSelected.value < numberEmails.value
     )
 
     let bulkSelect = () => {
